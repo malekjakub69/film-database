@@ -1,5 +1,4 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 import { FC, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FilmApi } from '../../../api';
@@ -27,8 +26,9 @@ export const FilmSearchPage: FC = () => {
             setHasNextPage(data.pages[0].totalResults ? data.pages.length * PAGE_SIZE < data.pages[0].totalResults : false);
             setFilms(data?.pages.reduce((base, next) => [...base, ...(next.Search ?? [])], [] as Film[]) || ([] as Film[]));
         },
-        onError: (response: AxiosError<{ Error: string }>) => {
-            toast.error(`Někde se stala chyba | ${response.response?.data.Error || ''}`);
+        onError: (response: any) => {
+            console.log(response.Error);
+            toast.error(`Někde se stala chyba | ${response || ''}`);
         },
         enabled: !!debouncedString && debouncedString.length > 2
     });

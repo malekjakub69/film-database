@@ -9,7 +9,7 @@ export type Film = {
 export type BaseFilm = {
     Search?: Film[];
     totalResults?: number;
-    Response: boolean;
+    Response: string;
     Error?: string;
 };
 
@@ -36,4 +36,5 @@ export type FilmData = {
     Production?: string;
     Website?: string;
     Response: string;
+    Error?: string;
 };
